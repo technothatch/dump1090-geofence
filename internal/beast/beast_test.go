@@ -342,7 +342,7 @@ func TestExtractICAODirect(t *testing.T) {
 func TestExtractICAOAddressRecovery(t *testing.T) {
 	const want = 0xABC123
 	for _, df := range []byte{0, 4, 5, 16, 20, 21} {
-		t.Run(string(rune('A'+rune(df))), func(t *testing.T) {
+		t.Run(string('A'+rune(df)), func(t *testing.T) {
 			p := make([]byte, 7)
 			p[0] = df << 3
 			p[1], p[2], p[3] = 0x11, 0x22, 0x33

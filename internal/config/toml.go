@@ -147,7 +147,9 @@ func parseHeader(s string) (string, error) {
 		return "", fmt.Errorf("nested tables are not supported: %q", s)
 	}
 	for _, r := range name {
-		if !(r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' || r >= '0' && r <= '9' || r == '_' || r == '-' || r == ' ') {
+		valid := r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' ||
+			r >= '0' && r <= '9' || r == '_' || r == '-' || r == ' '
+		if !valid {
 			return "", fmt.Errorf("invalid table name %q", name)
 		}
 	}
@@ -207,7 +209,9 @@ func parseStatement(s string) (key string, value any, err error) {
 		return "", nil, fmt.Errorf("missing key before '='")
 	}
 	for _, r := range key {
-		if !(r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' || r >= '0' && r <= '9' || r == '_' || r == '-') {
+		valid := r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' ||
+			r >= '0' && r <= '9' || r == '_' || r == '-'
+		if !valid {
 			return "", nil, fmt.Errorf("invalid key %q", key)
 		}
 	}

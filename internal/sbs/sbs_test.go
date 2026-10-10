@@ -213,5 +213,7 @@ func TestParseNormalizesHexCase(t *testing.T) {
 	if obs.Hex != "abcdef" {
 		t.Errorf("Hex = %q, want abcdef", obs.Hex)
 	}
-	var _ *adsb.Aircraft = obs
+	if _, ok := any(obs).(*adsb.Aircraft); !ok {
+		t.Fatalf("obs has type %T, want *adsb.Aircraft", obs)
+	}
 }
